@@ -5,9 +5,10 @@ langchain-core==0.3.10
 langchain-community==0.3.2
 langchain-text-splitters
 openai==1.40.0
-pypdf
+pypdf>=4.0.0
 PyMuPDF==1.24.1
 python-docx
 openpyxl
 faiss-cpu==1.13.0
 gitpython
+httpx==0.27.2
