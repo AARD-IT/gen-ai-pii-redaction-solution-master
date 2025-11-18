@@ -8,7 +8,7 @@ openai==1.40.0
 
 # File Processing Libraries
 pypdf                     
-PyMuPDF==1.22.0       
+PyMuPDF==1.24.1    
 python-docx
 openpyxl
 
