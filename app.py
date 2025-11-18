@@ -1,5 +1,4 @@
 import os
-import pypdf
 import json
 import re
 import base64
@@ -11,17 +10,24 @@ import streamlit as st
 from typing import Optional, List
 from pathlib import Path
 
+# --- 1. PAGE CONFIG (Must be first) ---
+st.set_page_config(
+    page_title="Gen AI PII Redaction", 
+    layout="wide",
+)
+
+# --- 2. SAFE IMPORT BLOCK (Fixes your error) ---
+try:
+    import pypdf
+except ImportError:
+    import PyPDF2 as pypdf  # Fallback if the main one fails
+
 # Required for structured output and LLM interaction
 from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langchain_core.exceptions import OutputParserException
 
-# --- 1. CRITICAL FIX: PAGE CONFIG MUST BE FIRST ---
-st.set_page_config(
-    page_title="Gen AI PII Redaction", 
-    layout="wide",
-)
 
 # --- Pydantic Schemas for Structured Output ---
 class RedactionResult(BaseModel):
@@ -207,7 +213,7 @@ def display_results_in_streamlit(file_name: str, result: RedactionResult):
 
 
 def main_streamlit_app():
-    # st.set_page_config has been MOVED to top
+    # Page Config is now at the top of the file!
     
     # --- Logo and Title ---
     LOGO_PATH = Path("assets") / "an_logo.png"
