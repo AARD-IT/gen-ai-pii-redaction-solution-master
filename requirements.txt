@@ -6,11 +6,11 @@ langchain-community==0.3.2
 langchain-text-splitters
 openai==1.40.0
 
-# File Processing Libraries (The fixed versions)
+# File Processing Libraries
 pypdf 
-fitz
+PyMuPDF==1.23.7  
 python-docx
 openpyxl
 
-# Other necessary libraries found in imports (missing from your current list)
+# Other necessary libraries
 faiss-cpu==1.13.0
