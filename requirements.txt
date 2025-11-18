@@ -1,0 +1,10 @@
+streamlit
+pydantic
+langchain-openai
+langchain-core
+
+# File Processing Libraries
+pypdf            # For PdfReader
+PyMuPDF          # For 'import fitz'
+python-docx      # For 'import docx'
+openpyxl         # For 'import openpyxl'

@@ -1,0 +1,34 @@
+# Dockerfile content
+
+# 1. Base Image: Use a stable and common Python image for minimal container size.
+FROM python:3.10-slim-buster
+
+# 2. Set the working directory inside the container
+WORKDIR /app
+
+# 3. Install System Dependencies: Required for PyMuPDF (fitz) and general file processing.
+# build-essential is often needed for complex C extensions during pip install.
+# libglib2.0-0 and ghostscript are necessary for robust PDF/image handling.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    libglib2.0-0 \
+    ghostscript \
+    && rm -rf /var/lib/apt/lists/*
+
+# 4. Install Python Dependencies
+# Copy requirements.txt first to leverage Docker caching (faster rebuilds).
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Copy Application Code and Assets
+# This copies app.py, assets/, demo_documents/, and .streamlit/ config.
+# Ensure your local files are committed with the correct case!
+COPY . /app
+
+# 6. Expose the port Streamlit uses (Standard Streamlit port)
+EXPOSE 8501
+
+# 7. Command to Run the Application
+# This starts the Streamlit server when the container launches, binding to 0.0.0.0 for external access.
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
