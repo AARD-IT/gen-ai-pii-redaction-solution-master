@@ -1,17 +1,17 @@
 streamlit==1.37.0
 pydantic==2.12.4
 langchain-openai
-langchain-core==0.3.10
+langchain-core==0.3.10          # Keep your main core version
 langchain-community==0.3.2
-langchain-text-splitters==0.0.2  
+langchain-text-splitters        # REMOVED CONFLICTING VERSION PIN (0.0.2)
 openai==1.40.0
 
 # File Processing Libraries
-pypdf                     
-PyMuPDF==1.24.1    
+pypdf
+PyMuPDF==1.24.1                 # Fixes the 'import fitz' error
 python-docx
 openpyxl
 
 # Other necessary libraries
-faiss-cpu==1.13.0
+faiss-cpu==1.13.0               # Kept, as your code cannot be changed
 gitpython
