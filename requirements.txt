@@ -1,10 +1,16 @@
-streamlit
-pydantic
+streamlit==1.37.0
+pydantic==2.12.4
 langchain-openai
-langchain-core
+langchain-core==0.3.10
+langchain-community==0.3.2
+langchain-text-splitters
+openai==1.40.0
 
-# File Processing Libraries
-pypdf            # For PdfReader
-PyMuPDF          # For 'import fitz'
-python-docx      # For 'import docx'
-openpyxl         # For 'import openpyxl'
+# File Processing Libraries (The fixed versions)
+pypdf 
+fitz
+python-docx
+openpyxl
+
+# Other necessary libraries found in imports (missing from your current list)
+faiss-cpu==1.13.0
