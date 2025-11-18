@@ -17,6 +17,12 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langchain_core.exceptions import OutputParserException
 
+# --- 1. CRITICAL FIX: PAGE CONFIG MUST BE FIRST ---
+st.set_page_config(
+    page_title="Gen AI PII Redaction", 
+    layout="wide",
+)
+
 # --- Pydantic Schemas for Structured Output ---
 class RedactionResult(BaseModel):
     """The result of a redaction task, containing the redacted text and a list of identified PII."""
@@ -26,7 +32,6 @@ class RedactionResult(BaseModel):
 # --- LLM and Agentic Pipeline Configuration ---
 
 # UPDATED: Prioritize Streamlit Secrets, then Environment Variables.
-# DO NOT hardcode keys in production code.
 if "OPENAI_API_KEY" in st.secrets:
     API_KEY = st.secrets["OPENAI_API_KEY"]
 else:
@@ -202,10 +207,7 @@ def display_results_in_streamlit(file_name: str, result: RedactionResult):
 
 
 def main_streamlit_app():
-    st.set_page_config(
-        page_title="Gen AI PII Redaction", 
-        layout="wide",
-    )
+    # st.set_page_config has been MOVED to top
     
     # --- Logo and Title ---
     LOGO_PATH = Path("assets") / "an_logo.png"
