@@ -213,20 +213,24 @@ def display_results_in_streamlit(file_name: str, result: RedactionResult):
 
 
 def main_streamlit_app():
-    # Page Config is now at the top of the file!
+    # =========================================================================
+    # UPDATED HEADER: Company Logo + Name (Analytics Avenue)
+    # =========================================================================
+    logo_url = "https://raw.githubusercontent.com/Analytics-Avenue/streamlit-dataapp/main/logo.png"
+    st.markdown(f"""
+    <div style="display:flex; align-items:center; margin-bottom:20px;">
+        <img src="{logo_url}" width="60" style="margin-right:10px;">
+        <div style="line-height:1;">
+            <div style="color:#064b86; font-size:36px; font-weight:bold; margin:0;">Analytics Avenue &</div>
+            <div style="color:#064b86; font-size:36px; font-weight:bold; margin:0;">Advanced Analytics</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # App Specific Title (Kept below branding)
+    st.title("🤖 Automated PII Redaction Solution (Gen AI)")
+    st.subheader("Redact Personal Identifiable Information from Documents")
     
-    # --- Logo and Title ---
-    LOGO_PATH = Path("assets") / "an_logo.png"
-    
-    col_logo, col_title = st.columns([1, 4])
-    with col_logo:
-        if LOGO_PATH.exists():
-            st.image(str(LOGO_PATH), width=150)
-            
-    with col_title:
-        st.title("🤖 Automated PII Redaction Solution (Gen AI)")
-        st.subheader("Redact Personal Identifiable Information from Documents")
-        
     st.markdown("---")
     
     if not redaction_llm:
@@ -271,10 +275,10 @@ def main_streamlit_app():
                         with st.spinner(f"Redacting **{file_name}**..."):
                             result = process_document_for_redaction(file_path) 
                         
-                        if result:
-                            display_results_in_streamlit(file_name, result)
-                        else:
-                            st.error(f"❌ Failed to process **{file_name}**.")
+                            if result:
+                                display_results_in_streamlit(file_name, result)
+                            else:
+                                st.error(f"❌ Failed to process **{file_name}**.")
                 
                 st.balloons()
                 st.success("✅ All documents processed!")
@@ -308,10 +312,10 @@ def main_streamlit_app():
                     with st.spinner(f"Redacting **{file_name}**..."):
                         result = process_document_for_redaction(file_path) 
                     
-                    if result:
-                        display_results_in_streamlit(file_name, result)
-                    else:
-                        st.error(f"❌ Failed to process **{file_name}**.")
+                        if result:
+                            display_results_in_streamlit(file_name, result)
+                        else:
+                            st.error(f"❌ Failed to process **{file_name}**.")
 
             st.balloons()
             st.success("✅ All demo documents processed!")
